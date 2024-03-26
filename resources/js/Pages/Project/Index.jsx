@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
-export default function Index({ auth }) {
+export default function Index({ auth, projects }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -17,7 +17,10 @@ export default function Index({ auth }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
-                            Project table goes here
+                            <pre>
+                                {" "}
+                                {JSON.stringify(projects, undefined, 2)}{" "}
+                            </pre>
                         </div>
                     </div>
                 </div>
