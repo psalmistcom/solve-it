@@ -4,6 +4,8 @@ import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants";
 import { Head, Link, router } from "@inertiajs/react";
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/16/solid";
+import TableHeading from "@/Components/TableHeading";
 
 export default function Index({ auth, projects, queryParams = null }) {
     queryParams = queryParams || {};
@@ -54,53 +56,90 @@ export default function Index({ auth, projects, queryParams = null }) {
                                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                                         <tr className="text-nowrap">
-                                            <th
-                                                onClick={(e) =>
-                                                    sortChanged("id")
+                                            <TableHeading
+                                                name="id"
+                                                sort_field={
+                                                    queryParams.sort_field
                                                 }
-                                                className="px-3 py-3"
-                                            >
-                                                ID
-                                            </th>
-                                            <th className="px-3 py-3">Image</th>
-                                            <th
-                                                onClick={(e) =>
-                                                    sortChanged("name")
+                                                sort_direction={
+                                                    queryParams.sort_direction
                                                 }
-                                                className="px-3 py-3"
+                                                sortChanged={sortChanged}
                                             >
-                                                Name
+                                                {" "}
+                                                ID{" "}
+                                            </TableHeading>
+                                            <th className="px-3 py-3">
+                                                <div className="px-3 py-2">
+                                                    Image
+                                                </div>
                                             </th>
-                                            <th
-                                                onClick={(e) =>
-                                                    sortChanged("status")
+                                            <TableHeading
+                                                name="name"
+                                                sort_field={
+                                                    queryParams.sort_field
                                                 }
-                                                className="px-3 py-3"
-                                            >
-                                                Status
-                                            </th>
-                                            <th
-                                                onClick={(e) =>
-                                                    sortChanged("created_at")
+                                                sort_direction={
+                                                    queryParams.sort_direction
                                                 }
-                                                className="px-3 py-3"
+                                                sortChanged={sortChanged}
                                             >
-                                                Create Date
-                                            </th>
-                                            <th
-                                                onClick={(e) =>
-                                                    sortChanged("due_date")
+                                                {" "}
+                                                NAME{" "}
+                                            </TableHeading>
+                                            <TableHeading
+                                                name="status"
+                                                sort_field={
+                                                    queryParams.sort_field
                                                 }
-                                                className="px-3 py-3"
+                                                sort_direction={
+                                                    queryParams.sort_direction
+                                                }
+                                                sortChanged={sortChanged}
                                             >
-                                                Due Date
-                                            </th>
-                                            <th
-                                                onClick={(e) => sortChanged()}
-                                                className="px-3 py-3"
+                                                {" "}
+                                                STATUS{" "}
+                                            </TableHeading>
+                                            <TableHeading
+                                                name="created_at"
+                                                sort_field={
+                                                    queryParams.sort_field
+                                                }
+                                                sort_direction={
+                                                    queryParams.sort_direction
+                                                }
+                                                sortChanged={sortChanged}
                                             >
-                                                Created By
-                                            </th>
+                                                {" "}
+                                                CREATE DATE{" "}
+                                            </TableHeading>
+                                            <TableHeading
+                                                name="due_date"
+                                                sort_field={
+                                                    queryParams.sort_field
+                                                }
+                                                sort_direction={
+                                                    queryParams.sort_direction
+                                                }
+                                                sortChanged={sortChanged}
+                                            >
+                                                {" "}
+                                                DUE DATE{" "}
+                                            </TableHeading>
+                                            <TableHeading
+                                                name="created_by"
+                                                sort_field={
+                                                    queryParams.sort_field
+                                                }
+                                                sort_direction={
+                                                    queryParams.sort_direction
+                                                }
+                                                sortChanged={sortChanged}
+                                            >
+                                                {" "}
+                                                Created By{" "}
+                                            </TableHeading>
+
                                             <th className="px-3 py-3 text-right">
                                                 Actions
                                             </th>
