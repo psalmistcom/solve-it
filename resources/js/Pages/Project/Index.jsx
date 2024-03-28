@@ -40,9 +40,31 @@ export default function Index({ auth, projects, queryParams = null }) {
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Projects
-                </h2>
+                <div className="flex justify-between items-center">
+                    <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        Projects
+                    </h2>
+                    <Link
+                        href={route("project.create")}
+                        className="flex justify-between gap-1 bg-orange-700 px-3 py-1 text-white rounded shadow transition-all hover:bg-orange-600 "
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                            />
+                        </svg>
+                        Add New
+                    </Link>
+                </div>
             }
         >
             <Head title="Projects" />
