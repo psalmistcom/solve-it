@@ -214,8 +214,15 @@ export default function Index({ auth, projects, queryParams = null }) {
                                                         style={{ width: 60 }}
                                                     />
                                                 </td>
-                                                <td className="px-3 py-2">
-                                                    {project.name}
+                                                <td className="px-3 py-2 hover:underline text-gray-300 text-nowrap">
+                                                    <Link
+                                                        href={route(
+                                                            "project.show",
+                                                            project.id
+                                                        )}
+                                                    >
+                                                        {project.name}
+                                                    </Link>
                                                 </td>
                                                 <td className="px-3 py-2">
                                                     <span
@@ -236,7 +243,7 @@ export default function Index({ auth, projects, queryParams = null }) {
                                                 <td className="px-3 py-2">
                                                     {project.created_at}
                                                 </td>
-                                                <td className="px-3 py-2">
+                                                <td className="px-3 py-2 text-nowrap">
                                                     {project.due_date}
                                                 </td>
                                                 <td className="px-3 py-2">
