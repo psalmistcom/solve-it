@@ -12,7 +12,10 @@ export default function show({ auth, project, tasks, queryParams }) {
                 <div className="flex justify-between items-center">
                     <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                         <span>
-                            <Link href=""> &laquo;</Link>
+                            <Link href={route("project.index")}>
+                                {" "}
+                                <ArrowLongLeftIcon />{" "}
+                            </Link>
                         </span>{" "}
                         {`Project: "${project.name}"`}
                     </h2>
