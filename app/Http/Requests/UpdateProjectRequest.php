@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enum\Status;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProjectRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,14 @@ class UpdateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => ['required', 'max:255'],
+            'image' => ['nullable', 'image'],
+            "description" => ['nullable', 'string'],
+            "due_date" => ['nullable', 'date'],
+            "status" => 'required|in:'
+                . Status::COMPLETED->value . ','
+                . Status::IN_PROGRESS->value . ','
+                . Status::PENDING->value,
         ];
     }
 }

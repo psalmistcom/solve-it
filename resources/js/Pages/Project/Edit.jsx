@@ -7,18 +7,18 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Create({ auth, project }) {
-    const { data, setData, post, errors, reset } = useForm({
-        image_path: project.image_path || "",
+    const { data, setData, put, errors, reset } = useForm({
+        image: "",
         name: project.name || "",
         status: project.status || "",
         description: project.description || "",
         due_date: project.due_date || "",
     });
 
-    const onSubmit = (e) => {
+    const onUpdate = (e) => {
         e.preventDefault();
 
-        post(route("project.store"));
+        put(route("project.update", project.id));
     };
     return (
         <AuthenticatedLayout
@@ -37,8 +37,16 @@ export default function Create({ auth, project }) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        {project.image_path && (
+                            <div className="mb-4">
+                                <img
+                                    src={project.image_path}
+                                    className="object-cover w-full h-64"
+                                />
+                            </div>
+                        )}
                         <form
-                            onSubmit={onSubmit}
+                            onSubmit={onUpdate}
                             className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg"
                         >
                             <div>
