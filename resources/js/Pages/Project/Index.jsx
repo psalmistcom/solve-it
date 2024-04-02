@@ -45,6 +45,9 @@ export default function Index({ auth, projects, queryParams = null, success }) {
         }
         router.delete(route("project.destroy", project.id));
     };
+    const editProject = (project) => {
+        router.get(route("project.edit", project.id));
+    };
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -330,12 +333,14 @@ export default function Index({ auth, projects, queryParams = null, success }) {
                                                     {project.createdBy.name}
                                                 </td>
                                                 <td className="px-3 py-2 text-right text-nowrap">
-                                                    <Link
-                                                        href="{route('project.edit', project.id)}"
+                                                    <button
+                                                        onClick={(e) =>
+                                                            editProject(project)
+                                                        }
                                                         className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                                                     >
                                                         Edit
-                                                    </Link>
+                                                    </button>
                                                     <button
                                                         onClick={(e) =>
                                                             deleteProject(
