@@ -2,7 +2,6 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants";
 import { Head, Link } from "@inertiajs/react";
 import TasksTable from "../Task/TasksTable";
-import { ArrowLongLeftIcon } from "@heroicons/react/24/solid";
 
 export default function show({ auth, project, tasks, queryParams }) {
     return (
@@ -12,10 +11,7 @@ export default function show({ auth, project, tasks, queryParams }) {
                 <div className="flex justify-between items-center">
                     <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                         <span>
-                            <Link href={route("project.index")}>
-                                {" "}
-                                <ArrowLongLeftIcon />{" "}
-                            </Link>
+                            <Link href={route("project.index")}> &laquo;</Link>
                         </span>{" "}
                         {`Project: "${project.name}"`}
                     </h2>
