@@ -218,7 +218,7 @@ export default function Index({ auth, users, queryParams = null, success }) {
                                                 <TextInput
                                                     className="w-full"
                                                     defaultValue={
-                                                        queryParams.name
+                                                        queryParams.email
                                                     }
                                                     placeholder="search user email"
                                                     onBlur={(e) =>
