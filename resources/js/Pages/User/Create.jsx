@@ -1,7 +1,5 @@
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
-import SelectInput from "@/Components/SelectInput";
-import TextAreaInput from "@/Components/TextAreaInput";
 import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
@@ -47,6 +45,7 @@ export default function Create({ auth }) {
                                 />
                                 <TextInput
                                     id="user_name"
+                                    tabIndex="1"
                                     type="text"
                                     name="name"
                                     value={data.name}
@@ -68,6 +67,7 @@ export default function Create({ auth }) {
                                 />
                                 <TextInput
                                     id="user_email"
+                                    tabIndex="2"
                                     type="email"
                                     name="email"
                                     value={data.email}
@@ -88,6 +88,7 @@ export default function Create({ auth }) {
                                 />
                                 <TextInput
                                     id="user_password"
+                                    tabIndex="3"
                                     type="password"
                                     name="password"
                                     value={data.password}
@@ -108,6 +109,7 @@ export default function Create({ auth }) {
                                 />
                                 <TextInput
                                     id="user_password_confirmation"
+                                    tabIndex="4"
                                     type="password"
                                     name="password_confirmation"
                                     value={data.password_confirmation}
