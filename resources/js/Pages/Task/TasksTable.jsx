@@ -8,7 +8,7 @@ import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from "@/constants";
 export default function TasksTable({
     tasks,
     queryParams = null,
-    hideUserColumn = false,
+    hideProjectColumn = false,
 }) {
     queryParams = queryParams || {};
     const searchFieldChanged = (name, value) => {
@@ -51,15 +51,16 @@ export default function TasksTable({
                                 sort_direction={queryParams.sort_direction}
                                 sortChanged={sortChanged}
                             >
-                                {" "}
-                                ID{" "}
+                                ID
                             </TableHeading>
                             <th className="px-3 py-3">
                                 <div className="px-3 py-2">Image</div>
                             </th>
-                            {!hideUserColumn && (
+                            {!hideProjectColumn && (
                                 <th className="px-3 py-3">
-                                    <div className="px-3 py-2">User Name</div>
+                                    <div className="px-3 py-2">
+                                        Project Name
+                                    </div>
                                 </th>
                             )}
                             <TableHeading
@@ -68,8 +69,7 @@ export default function TasksTable({
                                 sort_direction={queryParams.sort_direction}
                                 sortChanged={sortChanged}
                             >
-                                {" "}
-                                NAME{" "}
+                                Name
                             </TableHeading>
                             <TableHeading
                                 name="status"
@@ -77,8 +77,7 @@ export default function TasksTable({
                                 sort_direction={queryParams.sort_direction}
                                 sortChanged={sortChanged}
                             >
-                                {" "}
-                                STATUS{" "}
+                                Status
                             </TableHeading>
                             <TableHeading
                                 name="created_at"
@@ -86,8 +85,7 @@ export default function TasksTable({
                                 sort_direction={queryParams.sort_direction}
                                 sortChanged={sortChanged}
                             >
-                                {" "}
-                                CREATE DATE{" "}
+                                Create Date
                             </TableHeading>
                             <TableHeading
                                 name="due_date"
@@ -95,8 +93,7 @@ export default function TasksTable({
                                 sort_direction={queryParams.sort_direction}
                                 sortChanged={sortChanged}
                             >
-                                {" "}
-                                DUE DATE{" "}
+                                Due Date
                             </TableHeading>
                             <TableHeading
                                 name="created_by"
@@ -104,8 +101,7 @@ export default function TasksTable({
                                 sort_direction={queryParams.sort_direction}
                                 sortChanged={sortChanged}
                             >
-                                {" "}
-                                Created By{" "}
+                                Created By
                             </TableHeading>
 
                             <th className="px-3 py-3 text-right">Actions</th>
@@ -115,7 +111,9 @@ export default function TasksTable({
                         <tr className="text-nowrap">
                             <th className="px-3 py-3"></th>
                             <th className="px-3 py-3"></th>
-                            {!hideUserColumn && <th className="px-3 py-3"></th>}
+                            {!hideProjectColumn && (
+                                <th className="px-3 py-3"></th>
+                            )}
                             <th className="px-3 py-3">
                                 <TextInput
                                     className="w-full"
@@ -168,16 +166,20 @@ export default function TasksTable({
                                         style={{ width: 60 }}
                                     />
                                 </td>
-                                {!hideUserColumn && (
+                                {!hideProjectColumn && (
                                     <td className="px-3 py-2">
-                                        {task.user.name}
+                                        {task.project.name}
                                     </td>
                                 )}
-                                <td className="px-3 py-2">{task.name}</td>
+                                <td className="px-3 py-2 text-gray-100 hover:underline">
+                                    <Link href={route("task.show", task.id)}>
+                                        {task.name}
+                                    </Link>
+                                </td>
                                 <td className="px-3 py-2">
                                     <span
                                         className={
-                                            "px-2 py-1 rounded text-white " +
+                                            "px-2 py-1 rounded text-nowrap text-white " +
                                             TASK_STATUS_CLASS_MAP[task.status]
                                         }
                                     >
@@ -189,19 +191,19 @@ export default function TasksTable({
                                 <td className="px-3 py-2">
                                     {task.createdBy.name}
                                 </td>
-                                <td className="px-3 py-2 text-right">
+                                <td className="px-3 py-2 text-right text-nowrap ">
                                     <Link
-                                        href="{route('task.edit', task.id)}"
+                                        href={route("task.edit", task.id)}
                                         className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                                     >
                                         Edit
                                     </Link>
-                                    <Link
-                                        href="{route('task.destroy', task.id)}"
+                                    <button
+                                        onClick={(e) => deleteTask(task)}
                                         className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
                                     >
                                         Delete
-                                    </Link>
+                                    </button>
                                 </td>
                             </tr>
                         ))}
