@@ -8,7 +8,7 @@ import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from "@/constants";
 export default function TasksTable({
     tasks,
     queryParams = null,
-    hideProjectColumn = false,
+    hideUserColumn = false,
 }) {
     queryParams = queryParams || {};
     const searchFieldChanged = (name, value) => {
@@ -57,11 +57,9 @@ export default function TasksTable({
                             <th className="px-3 py-3">
                                 <div className="px-3 py-2">Image</div>
                             </th>
-                            {!hideProjectColumn && (
+                            {!hideUserColumn && (
                                 <th className="px-3 py-3">
-                                    <div className="px-3 py-2">
-                                        Project Name
-                                    </div>
+                                    <div className="px-3 py-2">User Name</div>
                                 </th>
                             )}
                             <TableHeading
@@ -117,9 +115,7 @@ export default function TasksTable({
                         <tr className="text-nowrap">
                             <th className="px-3 py-3"></th>
                             <th className="px-3 py-3"></th>
-                            {!hideProjectColumn && (
-                                <th className="px-3 py-3"></th>
-                            )}
+                            {!hideUserColumn && <th className="px-3 py-3"></th>}
                             <th className="px-3 py-3">
                                 <TextInput
                                     className="w-full"
@@ -172,9 +168,9 @@ export default function TasksTable({
                                         style={{ width: 60 }}
                                     />
                                 </td>
-                                {!hideProjectColumn && (
+                                {!hideUserColumn && (
                                     <td className="px-3 py-2">
-                                        {task.project.name}
+                                        {task.user.name}
                                     </td>
                                 )}
                                 <td className="px-3 py-2">{task.name}</td>

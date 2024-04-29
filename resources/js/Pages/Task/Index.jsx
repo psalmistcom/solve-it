@@ -21,7 +21,7 @@ export default function Index({ auth, tasks, queryParams = null }) {
                             <TasksTable
                                 tasks={tasks}
                                 queryParams={queryParams}
-                                // hideProjectColumn={false}
+                                // hideUserColumn={false}
                             />
                         </div>
                     </div>
