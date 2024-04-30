@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Enum\Priority;
+use App\Enum\Status;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTaskRequest extends FormRequest
@@ -11,7 +13,7 @@ class UpdateTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,20 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => ['required', 'max:255'],
+            'image' => ['nullable', 'image'],
+            "description" => ['nullable', 'string'],
+            "due_date" => ['nullable', 'date'],
+            'project_id' => ['required', 'exists:projects,id'],
+            'assigned_user_id' => ['required', 'exists:users,id'],
+            "status" => 'required|in:'
+                . Status::COMPLETED->value . ','
+                . Status::IN_PROGRESS->value . ','
+                . Status::PENDING->value,
+            "priority" => 'required|in:'
+                . Priority::HIGH->value . ','
+                . Priority::MEDIUM->value . ','
+                . Priority::LOW->value,
         ];
     }
 }

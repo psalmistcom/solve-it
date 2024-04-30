@@ -13,6 +13,9 @@ export default function Create({ auth, task, projects, users }) {
         status: task.status || "",
         description: task.description || "",
         due_date: task.due_date || "",
+        project_id: task.project_id || "",
+        priority: task.priority || "",
+        assigned_user_id: task.assigned_user_id || "",
         _method: "PUT",
     });
 
@@ -58,6 +61,7 @@ export default function Create({ auth, task, projects, users }) {
                                 <SelectInput
                                     name="project_id"
                                     id="task_project_id"
+                                    value={data.project_id}
                                     className="mt-1 block w-full"
                                     onChange={(e) =>
                                         setData("project_id", e.target.value)
@@ -82,13 +86,12 @@ export default function Create({ auth, task, projects, users }) {
                             <div className="mt-4">
                                 <InputLabel
                                     htmlFor="task_image_path"
-                                    value="Task Image *"
+                                    value="Task Image"
                                 />
                                 <TextInput
                                     id="task_image_path"
                                     type="file"
                                     name="image"
-                                    required
                                     className="mt-1 block w-full"
                                     onChange={(e) =>
                                         setData("image", e.target.files[0])
@@ -167,6 +170,7 @@ export default function Create({ auth, task, projects, users }) {
                                 <SelectInput
                                     id="task_status"
                                     name="status"
+                                    value={data.status}
                                     className="mt-1 block w-full"
                                     onChange={(e) =>
                                         setData("status", e.target.value)
@@ -194,6 +198,7 @@ export default function Create({ auth, task, projects, users }) {
                                 <SelectInput
                                     id="task_priority"
                                     name="priority"
+                                    value={data.priority}
                                     className="mt-1 block w-full"
                                     onChange={(e) =>
                                         setData("priority", e.target.value)
@@ -219,6 +224,7 @@ export default function Create({ auth, task, projects, users }) {
                                 <SelectInput
                                     id="task_assigned_user"
                                     name="assigned_user_id"
+                                    value={data.assigned_user_id}
                                     className="mt-1 block w-full"
                                     onChange={(e) =>
                                         setData(
