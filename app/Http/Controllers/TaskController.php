@@ -105,13 +105,11 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        $task->update($request->validated());
-        /** @var $image \Illuminate\Http\UploadedFile */
+        $data = $request->validated();
         $image = $data['image'] ?? null;
         $data['updated_by'] = Auth::id();
         if ($image) {
             if ($task->image_path) {
-                // Storage::disk('public')->delete($task->image_path);
                 Storage::disk('public')->deleteDirectory(dirname($task->image_path));
             }
             $data['image_path'] = $image->store('task/' . Str::random(), 'public');
@@ -119,7 +117,7 @@ class TaskController extends Controller
         $task->update($data);
 
         return to_route('task.index')
-            ->with('success', "Task \" $task->name\" updated successfully!");
+            ->with('success', "Task \"$task->name\" was updated");
     }
 
     /**
@@ -134,5 +132,34 @@ class TaskController extends Controller
             Storage::disk('public')->deleteDirectory(dirname($task->image_path));
         }
         return to_route('task.index')->with('success', "Task \"$name\" was deleted Succesfully!");
+    }
+
+
+    /**
+     * Display the task of the currently logged in user
+     */
+    public function myTasks()
+    {
+        $user = auth()->user();
+        $query = Task::query()->where('assigned_user_id', $user->id);
+
+        $sortField = request("sort_field", "created_at");
+        $sortDirection = request("sort_direction", "desc");
+
+        if (request("name")) {
+            $query->where("name", "like", "%" . request("name") . "%");
+        }
+        if (request("status")) {
+            $query->where("status", request("status"));
+        }
+
+        $tasks = $query->orderBy($sortField, $sortDirection)
+            ->paginate(10)
+            ->onEachSide(1);
+        return inertia('Task/Index', [
+            'tasks' => TaskResource::collection($tasks),
+            'queryParams' => request()->query() ?: null,
+            'success' => session('success')
+        ]);
     }
 }

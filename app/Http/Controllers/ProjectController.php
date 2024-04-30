@@ -109,13 +109,12 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $project->update($request->validated());
+        $data = $request->validated();
         /** @var $image \Illuminate\Http\UploadedFile */
         $image = $data['image'] ?? null;
         $data['updated_by'] = Auth::id();
         if ($image) {
             if ($project->image_path) {
-                // Storage::disk('public')->delete($project->image_path);
                 Storage::disk('public')->deleteDirectory(dirname($project->image_path));
             }
             $data['image_path'] = $image->store('project/' . Str::random(), 'public');
