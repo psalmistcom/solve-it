@@ -2,7 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import TasksTable from "./TasksTable";
 
-export default function Index({ auth, tasks, queryParams = null }) {
+export default function Index({ auth, tasks, queryParams = null, success }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -43,6 +43,7 @@ export default function Index({ auth, tasks, queryParams = null }) {
                             <TasksTable
                                 tasks={tasks}
                                 queryParams={queryParams}
+                                success={success}
                                 // hideUserColumn={false}
                             />
                         </div>

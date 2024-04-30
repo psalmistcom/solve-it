@@ -3,7 +3,7 @@ import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants";
 import { Head, Link } from "@inertiajs/react";
 import TasksTable from "../Task/TasksTable";
 
-export default function show({ auth, project, tasks, queryParams }) {
+export default function show({ auth, project, success, tasks, queryParams }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -124,6 +124,7 @@ export default function show({ auth, project, tasks, queryParams }) {
                                 tasks={tasks}
                                 queryParams={queryParams}
                                 hideProjectColumn={true}
+                                success={success}
                             />
                         </div>
                     </div>
