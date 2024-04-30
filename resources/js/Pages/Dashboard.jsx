@@ -89,7 +89,7 @@ export default function Dashboard({
                                             Project Name
                                         </th>
                                         <th className="text-md font-semibold px-3 py-2">
-                                            Name
+                                            Task Name
                                         </th>
                                         <th className="text-md font-semibold px-3 py-2">
                                             Status
@@ -121,8 +121,15 @@ export default function Dashboard({
                                                     {task.project.name}
                                                 </Link>
                                             </td>
-                                            <td className="px-3 py-2">
-                                                {task.name}
+                                            <td className="px-3 py-2 hover:underline text-gray-400">
+                                                <Link
+                                                    href={route(
+                                                        "task.show",
+                                                        task.id
+                                                    )}
+                                                >
+                                                    {task.name}
+                                                </Link>
                                             </td>
                                             <td className="px-3 py-2">
                                                 <span
